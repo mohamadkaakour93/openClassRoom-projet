@@ -1,0 +1,27 @@
+<div class="face-snap-card" [ngClass]="{snapped: userHasSnapped}">
+    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.title">
+    <button [routerLink]="['/facesnaps']">BACK</button>
+
+  
+    <!-- Utilisation correcte de *ngIf et ng-template -->
+    <p *ngIf="faceSnap.location; else noLocation">
+      localisation : {{ faceSnap.location }}
+    </p>
+    <ng-template #noLocation>
+      <p>localisation non spécifiée</p>
+    </ng-template>
+  
+    <h2>{{ faceSnap.title | uppercase }}</h2>
+    <p>{{ faceSnap.description }}</p>
+    <p>Date: {{ faceSnap.CreatedAt | date: 'longDate' }}</p>
+  
+    <p>
+      <button (click)="onSnap()">
+        <span [ngStyle]="{'color': userHasSnapped ? 'red' : 'green'}">
+          {{ snapButtonText }}
+        </span>
+        <span [ngStyle]="{'color': 'rgb(0, ' + faceSnap.snaps + ', 0)'}">📱 {{ faceSnap.snaps }}</span>
+      </button>
+    </p>
+  </div>
+  
